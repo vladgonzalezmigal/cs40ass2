@@ -1,0 +1,6 @@
+[submodule "app"]
+	path = app
+	url = https://github.com/infracourse/yoctogram-app
+[submodule "web"]
+	path = web
+	url = https://github.com/infracourse/yoctogram-web
