@@ -12,7 +12,6 @@ from cdk.util import settings, Props
 class NetworkStack(Stack):
     backend_certificate: acm.ICertificate
     frontend_certificate: acm.ICertificate
-    hosted_zone: r53.IHostedZone
     vpc: ec2.IVpc
 
     def __init__(
