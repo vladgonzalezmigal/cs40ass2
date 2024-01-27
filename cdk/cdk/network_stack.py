@@ -20,10 +20,6 @@ class NetworkStack(Stack):
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        self.hosted_zone = r53.HostedZone.from_lookup(
-            self, settings.ZONE_ID, domain_name=settings.SUNET_DNS_ROOT
-        )
-
         # FILLMEIN: VPC
         self.vpc = ec2.Vpc(
             self,
