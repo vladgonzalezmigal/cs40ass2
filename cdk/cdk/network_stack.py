@@ -33,7 +33,7 @@ class NetworkStack(Stack):
                 ),
                 ec2.SubnetConfiguration(
                     name="Private Subnet with NAT Gateway",
-                    subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS, #private with NAT
+                    subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT, #private with NAT
                     cidr_mask=24
                 ),
                 ec2.SubnetConfiguration(
