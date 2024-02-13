@@ -23,12 +23,37 @@ class NetworkStack(Stack):
         self.vpc = ec2.Vpc(
             self,
             f"{settings.PROJECT_NAME}-vpc",
+            ip_addresses=ec2.IpAddresses.cidr("10.0.0.0/16"), 
+            availability_zones=["us-west-2a","us-west-2b"],
+            subnet_configuration=[
+                ec2.SubnetConfiguration(
+                    name="Public",
+                    subnet_type=ec2.SubnetType.PUBLIC,
+                    cidr_mask=24
+                ),
+                ec2.SubnetConfiguration(
+                    name="Private Subnet with NAT Gateway",
+                    subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS, #private with NAT
+                    cidr_mask=24
+                ),
+                ec2.SubnetConfiguration(
+                    name="Private Subnet Isolated",
+                    subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
+                    cidr_mask=24
+                )
+            ],
         )
 
         # FILLMEIN: TLS certificate for backend
         self.backend_certificate = acm.Certificate(
             self,
             f"{settings.PROJECT_NAME}-backend-certificate",
+            domain_name=f"{settings.SUNET}.infracourse.cloud",
+            subject_alternative_names=[
+                f"*.{settings.SUNET}.infracourse.cloud",
+                f"*.yoctogram.{settings.SUNET}.infracourse.cloud"
+            ],
+            validation=acm.CertificateValidation.from_dns(props.network_hosted_zone)
         )
 
         # COMPLETED FOR YOU: TLS certificate for frontend
