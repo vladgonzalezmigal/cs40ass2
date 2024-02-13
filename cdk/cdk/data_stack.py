@@ -39,7 +39,7 @@ class DataStack(Stack):
                 username="yoctogram",  # Default username
                 exclude_characters=settings.DB_SPECIAL_CHARS_EXCLUDE
             ),
-            # deletion_protection=False,  # Set to True in production
+            deletion_protection=True,  # Set to True in production
         )
 
         # COMPLETED FOR YOU: S3 Buckets and Cloudfront CDN for images
